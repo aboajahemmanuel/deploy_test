@@ -1,5 +1,829 @@
-<h1> Lagos House Agent Going Places</h1>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucion Towers Construction LTD/</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        :root {
+            --primary: #fbbf24;
+            --primary-dark: #f59e0b;
+            --secondary: #3b82f6;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --bg-light: #f9fafb;
+            --white: #ffffff;
+            --border: #e5e7eb;
+            --orange: #f97316;
+            --blue-worker: #1e40af;
+            --construction-yellow: #eab308;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fefefe;
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Subtle Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(251, 191, 36, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.03) 0%, transparent 50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: lowercase;
+            letter-spacing: -0.02em;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Construction Scene */
+        .construction-scene {
+            position: relative;
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .scene-container {
+            position: relative;
+            width: 400px;
+            height: 280px;
+            margin: 0 auto;
+        }
+
+        /* Construction Barrier */
+        .barrier {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 40px;
+            z-index: 3;
+        }
+
+        .barrier-top {
+            width: 100%;
+            height: 15px;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--construction-yellow),
+                var(--construction-yellow) 15px,
+                #000 15px,
+                #000 30px
+            );
+            border-radius: 8px 8px 0 0;
+            position: relative;
+        }
+
+        .barrier-top::before,
+        .barrier-top::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            width: 8px;
+            height: 8px;
+            background: #dc2626;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(220, 38, 38, 0.3);
+        }
+
+        .barrier-top::before { left: 10px; }
+        .barrier-top::after { right: 10px; }
+
+        .barrier-legs {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px;
+        }
+
+        .barrier-leg {
+            width: 6px;
+            height: 25px;
+            background: linear-gradient(135deg, #d97706, #b45309);
+            border-radius: 0 0 3px 3px;
+        }
+
+        /* Traffic Cones */
+        .cone {
+            position: absolute;
+            bottom: 55px;
+            width: 20px;
+            height: 30px;
+            z-index: 2;
+        }
+
+        .cone-1 {
+            left: 50px;
+            animation: coneFloat 3s ease-in-out infinite;
+        }
+
+        .cone-2 {
+            right: 50px;
+            animation: coneFloat 3s ease-in-out infinite 1.5s;
+        }
+
+        .cone-body {
+            width: 100%;
+            height: 25px;
+            background: linear-gradient(135deg, var(--orange), #ea580c);
+            clip-path: polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%);
+            position: relative;
+        }
+
+        .cone-stripe {
+            position: absolute;
+            top: 8px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--white);
+            clip-path: polygon(30% 0%, 70% 0%, 90% 100%, 10% 100%);
+        }
+
+        .cone-base {
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, #374151, #1f2937);
+            border-radius: 0 0 10px 10px;
+            margin-top: -1px;
+        }
+
+        @keyframes coneFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(2deg); }
+        }
+
+        /* Worker 1 (Construction Worker) */
+        .worker-1 {
+            position: absolute;
+            bottom: 55px;
+            left: 80px;
+            z-index: 4;
+            animation: workerBob 4s ease-in-out infinite;
+        }
+
+        .worker-1-body {
+            width: 35px;
+            height: 55px;
+            background: linear-gradient(135deg, #0891b2, #0e7490);
+            border-radius: 18px 18px 8px 8px;
+            position: relative;
+        }
+
+        .worker-1-head {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #fcd34d, #f59e0b);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        }
+
+        .worker-1-helmet {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 32px;
+            height: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 16px 16px 4px 4px;
+            box-shadow: 0 3px 10px rgba(251, 191, 36, 0.4);
+        }
+
+        .worker-1-helmet::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px 10px 2px 2px;
+        }
+
+        .worker-1-arms {
+            position: absolute;
+            top: 12px;
+            left: -15px;
+            width: 15px;
+            height: 30px;
+            background: linear-gradient(135deg, #fcd34d, #f59e0b);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(245, 158, 11, 0.3);
+        }
+
+        .worker-1-arms::after {
+            content: '';
+            position: absolute;
+            right: -35px;
+            width: 15px;
+            height: 30px;
+            background: linear-gradient(135deg, #fcd34d, #f59e0b);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(245, 158, 11, 0.3);
+        }
+
+        .worker-1-legs {
+            position: absolute;
+            bottom: -35px;
+            left: 6px;
+            width: 10px;
+            height: 35px;
+            background: linear-gradient(135deg, #1e40af, #1e3a8a);
+            border-radius: 5px;
+        }
+
+        .worker-1-legs::after {
+            content: '';
+            position: absolute;
+            right: -13px;
+            width: 10px;
+            height: 35px;
+            background: linear-gradient(135deg, #1e40af, #1e3a8a);
+            border-radius: 5px;
+        }
+
+        /* Tool Belt */
+        .tool-belt {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 8px;
+            background: linear-gradient(135deg, #92400e, #78350f);
+            border-radius: 4px;
+        }
+
+        .tool-belt::before {
+            content: '';
+            position: absolute;
+            right: -3px;
+            top: -5px;
+            width: 6px;
+            height: 10px;
+            background: #dc2626;
+            border-radius: 3px;
+        }
+
+        /* Worker 2 (Supervisor) */
+        .worker-2 {
+            position: absolute;
+            bottom: 55px;
+            right: 80px;
+            z-index: 4;
+            animation: workerBob 4s ease-in-out infinite 2s;
+        }
+
+        .worker-2-body {
+            width: 35px;
+            height: 55px;
+            background: linear-gradient(135deg, #1e40af, #1e3a8a);
+            border-radius: 18px 18px 8px 8px;
+            position: relative;
+        }
+
+        .worker-2-head {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #fcd34d, #f59e0b);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        }
+
+        .worker-2-helmet {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 32px;
+            height: 25px;
+            background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+            border-radius: 16px 16px 4px 4px;
+            box-shadow: 0 3px 10px rgba(209, 213, 219, 0.4);
+        }
+
+        .worker-2-helmet::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 12px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 10px 10px 2px 2px;
+        }
+
+        .worker-2-arms {
+            position: absolute;
+            top: 12px;
+            left: -15px;
+            width: 15px;
+            height: 30px;
+            background: linear-gradient(135deg, #fcd34d, #f59e0b);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(245, 158, 11, 0.3);
+        }
+
+        .worker-2-arms::after {
+            content: '';
+            position: absolute;
+            right: -35px;
+            width: 15px;
+            height: 30px;
+            background: linear-gradient(135deg, #fcd34d, #f59e0b);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(245, 158, 11, 0.3);
+        }
+
+        .worker-2-legs {
+            position: absolute;
+            bottom: -35px;
+            left: 6px;
+            width: 10px;
+            height: 35px;
+            background: linear-gradient(135deg, #374151, #1f2937);
+            border-radius: 5px;
+        }
+
+        .worker-2-legs::after {
+            content: '';
+            position: absolute;
+            right: -13px;
+            width: 10px;
+            height: 35px;
+            background: linear-gradient(135deg, #374151, #1f2937);
+            border-radius: 5px;
+        }
+
+        /* Briefcase */
+        .briefcase {
+            position: absolute;
+            bottom: 8px;
+            right: -20px;
+            width: 18px;
+            height: 12px;
+            background: linear-gradient(135deg, #92400e, #78350f);
+            border-radius: 2px;
+            animation: briefcaseFloat 2s ease-in-out infinite;
+        }
+
+        .briefcase::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 3px;
+            background: #78350f;
+            border-radius: 2px;
+        }
+
+        @keyframes briefcaseFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+
+        @keyframes workerBob {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-6px) scale(1.02); }
+        }
+
+        /* Text Content */
+        .text-content {
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .maintenance-icon {
+            margin-bottom: 1.5rem;
+        }
+
+        .maintenance-title {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .maintenance-subtitle {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .maintenance-description {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            line-height: 1.7;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .more-info-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--text-primary);
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.3);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.025em;
+        }
+
+        .more-info-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .more-info-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark), #d97706);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(251, 191, 36, 0.4);
+        }
+
+        .more-info-btn:hover::before {
+            left: 100%;
+        }
+
+        .more-info-btn:active {
+            transform: translateY(0);
+        }
+
+        .more-info-btn svg {
+            transition: transform 0.3s ease;
+        }
+
+        .more-info-btn:hover svg {
+            transform: translateX(3px);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .scene-container {
+                width: 300px;
+                height: 220px;
+            }
+            
+            .barrier {
+                width: 150px;
+                height: 30px;
+            }
+            
+            .worker-1 {
+                left: 50px;
+            }
+            
+            .worker-2 {
+                right: 50px;
+            }
+            
+            .cone-1 {
+                left: 30px;
+            }
+            
+            .cone-2 {
+                right: 30px;
+            }
+            
+            .maintenance-title {
+                font-size: 3rem;
+            }
+            
+            .maintenance-subtitle {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .header {
+                padding: 20px 0;
+            }
+            
+            .maintenance-title {
+                font-size: 2.5rem;
+            }
+            
+            .maintenance-subtitle {
+                font-size: 1.8rem;
+            }
+            
+            .maintenance-description {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .more-info-btn {
+                padding: 14px 28px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- <header class="header">
+            <div class="logo">logo</div>
+            <nav class="nav">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+        </header> -->
+
+        <main class="main-content">
+            <div class="construction-scene">
+                <div class="scene-container">
+                    <!-- Construction Barrier -->
+                    <div class="barrier">
+                        <div class="barrier-top"></div>
+                        <div class="barrier-legs">
+                            <div class="barrier-leg"></div>
+                            <div class="barrier-leg"></div>
+                        </div>
+                    </div>
+
+                    <!-- Traffic Cones -->
+                    <div class="cone cone-1">
+                        <div class="cone-body">
+                            <div class="cone-stripe"></div>
+                        </div>
+                        <div class="cone-base"></div>
+                    </div>
+                    
+                    <div class="cone cone-2">
+                        <div class="cone-body">
+                            <div class="cone-stripe"></div>
+                        </div>
+                        <div class="cone-base"></div>
+                    </div>
+
+                    <!-- Worker 1 (Construction Worker) -->
+                    <div class="worker-1">
+                        <div class="worker-1-body">
+                            <div class="worker-1-head"></div>
+                            <div class="worker-1-helmet"></div>
+                            <div class="worker-1-arms"></div>
+                            <div class="worker-1-legs"></div>
+                            <div class="tool-belt"></div>
+                        </div>
+                    </div>
+
+                    <!-- Worker 2 (Supervisor) -->
+                    <div class="worker-2">
+                        <div class="worker-2-body">
+                            <div class="worker-2-head"></div>
+                            <div class="worker-2-helmet"></div>
+                            <div class="worker-2-arms"></div>
+                            <div class="worker-2-legs"></div>
+                        </div>
+                        <div class="briefcase"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-content">
+                <div class="maintenance-icon">
+                    <!-- You can swap this SVG for your brand or another icon -->
+                    <svg width="54" height="54" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="12" fill="#fbbf24"/>
+                        <path d="M12 7v5l3 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h1 class="maintenance-title">We'll Be Back Soon</h1>
+                <h2 class="maintenance-subtitle">Site Under Maintenance</h2>
+             <h1> Lagos House Agent Going Places</h1>
 
 <p>Welcome to our real estate agency! We specialize in helping you find the perfect home, whether you're looking to buy, sell, or rent. Our experienced agents are dedicated to providing personalized service and expert advice to make your real estate journey smooth and successful.</p>
 <p>Explore our listings, learn about the local market, and get in touch with our team to start your journey today!</p>
 <p>Contact us at <a href="mailto:tes@mail.com">Email Us</a> or call us at (123) 456-7890.</p>
+                <a href="https://projectcapitalinvestments.com/" class="more-info-btn">
+                    <span>More Info</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                    </svg>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function handleMoreInfo() {
+            const messages = [
+                "We expect to be back online within 2-3 hours. Thanks for your patience!",
+                "Follow us on social media for real-time updates on our maintenance progress.",
+                "This maintenance will bring exciting new features and improved performance.",
+                "Our team is working around the clock to minimize downtime. We appreciate your understanding!"
+            ];
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            alert(randomMessage);
+        }
+
+        // Add button ripple effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.querySelector('.more-info-btn');
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+            
+            // Add CSS for ripple animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    to {
+                        transform: scale(2);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        // Add smooth hover effects to navigation
+        document.querySelectorAll('.nav a').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
